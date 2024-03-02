@@ -45,5 +45,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun Screen1() {
+}
+
+@Composable
+fun Screen2() {
+}
+
+@Composable
 fun MyApp() {
 }
