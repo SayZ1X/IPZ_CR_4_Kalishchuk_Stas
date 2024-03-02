@@ -46,14 +46,20 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Screen1(navController: NavHostController) {
-    val context = LocalContext.current
-    Button(onClick = { navController.navigate("screen2") }) {
-        Text(text = "Go to Screen 2")
+    Column(modifier = Modifier.fillMaxSize()) {
+        for (i in 1..5) {
+            Button(
+                onClick = { navController.navigate("screen2/$i") },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = "Button $i")
+            }
+        }
     }
 }
 
 @Composable
-fun Screen2(navController: NavHostController) {
+fun Screen2(navController: NavHostController, buttonNumber: Int) {
     val scope = rememberCoroutineScope()
     Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center
