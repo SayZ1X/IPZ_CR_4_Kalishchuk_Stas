@@ -65,7 +65,13 @@ fun MyApp() {
     MaterialTheme {
         NavHost(navController, startDestination = "screen1") {
             composable("screen1") { Screen1(navController) }
-            composable("screen2") { Screen2(navController) }
+            composable(
+                route = "screen2/{buttonNumber}",
+                arguments = listOf(navArgument("buttonNumber") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val buttonNumber = backStackEntry.arguments?.getInt("buttonNumber") ?: 0
+                Screen2(navController, buttonNumber)
+            }
         }
     }
 }
