@@ -45,13 +45,27 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Screen1() {
+fun Screen1(navController: NavHostController) {
+    val context = LocalContext.current
+    Button(onClick = { navController.navigate("screen2") }) {
+        Text(text = "Go to Screen 2")
+    }
 }
 
 @Composable
-fun Screen2() {
+fun Screen2(navController: NavHostController) {
+    Button(onClick = { navController.popBackStack() }) {
+        Text(text = "Go back")
+    }
 }
 
 @Composable
 fun MyApp() {
+    val navController = rememberNavController()
+    MaterialTheme {
+        NavHost(navController, startDestination = "screen1") {
+            composable("screen1") { Screen1(navController) }
+            composable("screen2") { Screen2(navController) }
+        }
+    }
 }
